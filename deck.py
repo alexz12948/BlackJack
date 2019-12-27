@@ -16,10 +16,10 @@ class Deck():
     deck = []
 
     for i in range(2,11):
-        for j in range(4):
+        for _ in range(4):
             deck.append(card.Card(i, str(i)))
 
-    for i in range(4):
+    for _ in range(4):
         deck.append(card.Card(10, 'J'))
         deck.append(card.Card(10, 'Q'))
         deck.append(card.Card(10, 'K'))
