@@ -17,10 +17,13 @@ class User(person.Person):
 
     def __str__(self):
         return "Balance: {0:6}\nBet: {1:10}\n".format(self.balance, self.my_bet) + \
-                '\n'.join([str(card) for card in (self.cards)])
+                '\n'.join([str(card) for card in (self.cards)]) + "\nTotal: {:3}".format(self.get_total())
 
     def get_balance(self):
         return self.balance
+
+    def set_balance(self, new):
+        self.balance = new
 
     def get_bet_amount(self):
         return self.my_bet

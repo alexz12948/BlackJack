@@ -17,6 +17,9 @@ class Person:
         return len(self.cards)
 
     def get_total(self):
+        if self.total > 21:
+            return self.total - (self.num_aces() * 10)
+
         return self.total
 
     def add_card(self, card=card.Card()):

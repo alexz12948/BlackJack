@@ -48,9 +48,10 @@ def print_game(player, house):
     Input:
     Output:
     '''
+    print("\n" * 100)
     print("YOU:\n{}\n\nDEALER:\n{}\n".format(str(player), str(house)))
 
-def one_round():
+def one_round(new):
     '''
     DOCSTRING:
     Input:
@@ -60,6 +61,7 @@ def one_round():
     main_deck = deck.Deck()
 
     player1 = user.User(main_deck.deal_card(), main_deck.deal_card())
+    player1.set_balance(new)
     house = dealer.Dealer(main_deck.deal_card(), main_deck.deal_card())
 
     player1.anti_up()
@@ -68,18 +70,37 @@ def one_round():
     betting(player1)
 
     command = get_input()
+    while command == 'h':
+        player1.add_card(main_deck.deal_card())
 
-    while command != 'q':
-        while command == 'h':
-            player1.add_card(main_deck.deal_card())
-
-            if player1.busted():
-                print("You lost!!")
-
+        if player1.busted():
             print_game(player1, house)
+            print("PLAYER BUSTED!!")
+            return player1.get_balance()
 
+        print_game(player1, house)
 
         command = get_input()
+
+    house.switch_round()
+
+    while not house.busted():
+        if house.get_total() < 17:
+            house.add_card(main_deck.deal_card())
+            print_game(player1, house)
+        else:
+            break
+
+    print_game(player1, house)
+    if house.busted():
+        print("DEALER BUSTED")
+        player1.end_round(True)
+    elif player1.get_total() > house.get_total():
+        print("PLAYER WON!")
+        player1.end_round(True)
+    else:
+        print("DEALER WON")
+        player1.end_round(False)
 
     return player1.get_balance()
 
@@ -94,9 +115,25 @@ def game():
     print("If you win, you win back double what you bet!!")
     print("Hope you are ready!!!\n")
 
-    
+    balance = 100
     while balance >= 5:
-        balance = one_round()
+        balance = one_round(balance)
+
+        if balance < 5:
+            break
+
+        another_round = input("Play another round? Y/N?\n")
+
+        if another_round.lower() == 'n':
+            print("Game Over!!")
+            exit(0)
+
+    print("You ran out of money!")
+    again = input("Play again? Y/N?\n")
+
+    if again.lower() == 'y':
+        game()
 
 if __name__ == "__main__":
-    game()   
+    game()
+    exit(0)
