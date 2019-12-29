@@ -22,8 +22,8 @@ class TestCard(unittest.TestCase):
 
         mycard1 = card.Card(4, "4")
         mycard2 = card.Card(10, "10")
-        self.assertEqual(str(mycard1), "/----\\\n|    |\n|  4 |\n|    |\n\\----/\n")
-        self.assertEqual(str(mycard2), "/----\\\n|    |\n| 10 |\n|    |\n\\----/\n")
+        self.assertEqual(str(mycard1), "/----\\\n|    |\n|  4 |\n|    |\n\\----/")
+        self.assertEqual(str(mycard2), "/----\\\n|    |\n| 10 |\n|    |\n\\----/")
 
     def test_three(self):
         '''

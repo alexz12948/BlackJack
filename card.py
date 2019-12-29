@@ -19,7 +19,7 @@ class Card():
         r1 = f"/----\\\n"
         blank_row = f"|    |\n"
         r3 = "| {0:>2} |\n".format(self.rank)
-        r5 = f"\\----/\n"
+        r5 = f"\\----/"
         return r1 + blank_row + r3 + blank_row + r5
 
     def get_value(self):

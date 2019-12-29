@@ -1,25 +1,23 @@
 '''
 Name: Alexander Zsikla
 Date: 12/25/2019
-player.py
+user.py
 
 Description: This is the player module
 '''
 
 import card
 import deck
+import person
 
-class Player():
+class User(person.Person):
 
     balance = 100
     my_bet = 0
 
-    def __init__(self, card1=card.Card(), card2=card.Card()):
-        self.card1 = card1
-        self.card2 = card2
-
     def __str__(self):
-        return "Balance: {0:>6}\nBet: {1:>6}\n{2}{3}\n".format(self.balance, self.my_bet, str(self.card1), str(self.card2))
+        return "Balance: {0:6}\nBet: {1:10}\n".format(self.balance, self.my_bet) + \
+                '\n'.join([str(card) for card in (self.cards)])
 
     def get_balance(self):
         return self.balance
@@ -31,15 +29,20 @@ class Player():
         self.balance -= 5
 
     def bet(self, amount):
+        assert(type(amount) == int)
+
         if amount > self.balance:
             return False
         else:
             self.balance -= amount
-            self.bet = amount
+            self.my_bet = amount
             return True
 
     def end_round(self, won):
+        assert(type(won) == bool)
+
         if won:
-            self.balance += (2 * self.bet)
+            self.balance += (2 * self.my_bet)
+            self.my_bet = 0
         else:
-            self.bet = 0
+            self.my_bet = 0
