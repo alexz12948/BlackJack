@@ -31,5 +31,8 @@ class Deck():
         return len(self.deck)
 
     def deal_card(self):
+        if (len(self.deck) == 1):
+            self.deck = Deck()
+        
         rand_card = randint(0, len(self.deck) - 1)
         return (self.deck).pop(rand_card)
