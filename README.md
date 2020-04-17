@@ -18,7 +18,8 @@ deck.py - A class that represents the entire deck of cards, including the initia
 ##### Modules for the Players
 person.py - A superclass that represents a player in the game and contains functions that allow for calculations of totals and general game functions
 
-dealer.py - A subclass of Person, which contains functions specific to the dealer of BlackJack
+dealer.py - A subclass of Person, which contains functions specific to the dealer of BlackJack 
+
 user.py - A subclass of Person, which contains functions that allow the user to play the game properly
 
 ##### Modules for Testing
